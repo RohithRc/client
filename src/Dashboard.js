@@ -28,7 +28,7 @@ function Dashboard() {
     const getGenderedUser = async()=>{
         try {
             const responce = axios.get("http://localhost:8000/gendered-users",{
-            params : {gendeer : user?.gender_intrest}
+            params : {gender : user?.gender_intrest}
         })
 
         setGenderedUser(responce.data)
