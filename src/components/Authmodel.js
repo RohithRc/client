@@ -31,9 +31,6 @@ function Authmodel({setshowmodel,issignup}){
        console.log("data sent",email,password)
        
        const responce = await axios.post(`http://localhost:8000/${issignup ? 'signup' : 'login'}`,{email,password})
-        //console.log(responce)
-        //console.log("yoyoyo")
-        //console.log(responce.status)
         
         setCookie("email",responce.data.email)
         setCookie("UserId",responce.data.userId)
@@ -44,6 +41,8 @@ function Authmodel({setshowmodel,issignup}){
         
         if(success && issignup ) navigate('/onboard')
         if(success && !issignup ) navigate('/Dashboard')
+
+        window.location.reload()
     }
        catch(error)
        {

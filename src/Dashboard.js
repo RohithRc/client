@@ -6,7 +6,8 @@ import axios from 'axios'
 import {useCookies} from "react-cookie"
 
 function Dashboard() {
-    const [user,setUser]=useState()
+    const [user,setUser]=useState(null)
+    const [genderedUser,setGenderedUser] = useState(null)
     
     
     const[cookies,setCookie,removeCookie] = useCookies(["user"])
@@ -24,12 +25,26 @@ function Dashboard() {
         }
     }
 
+    const getGenderedUser = async()=>{
+        try {
+            const responce = axios.get("http://localhost:8000/gendered-users",{
+            params : {gendeer : user?.gender_intrest}
+        })
+
+        setGenderedUser(responce.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     useEffect(()=> {
         getUser()
-    },[])
+        getGenderedUser()
+    },[user,genderedUser])
 
     console.log("user",user)
+    console.log({gender : user?.gender_intrest})
+    console.log("gendered User--ss-----------------",genderedUser)
 
 
     const characters = [
@@ -66,6 +81,8 @@ function Dashboard() {
     }
     
     return (
+        <>
+        {user && 
         <div className="dashboard">
             <ChatContainer  user={user} />
             <div className="swipe-container">
@@ -83,6 +100,8 @@ function Dashboard() {
                 </div>
             </div>
         </div>
+        }
+        </>
     )
 }
 

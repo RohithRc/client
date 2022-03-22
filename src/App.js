@@ -9,15 +9,16 @@ import  {Cookies, useCookies} from "react-cookie"
 
 function App() {
 
-
-
+  const[cookies,setCookie,removeCookie] = useCookies(["user"])
+  const auth = cookies.AuthToken
+  console.log(auth)
 
   return (
     <BrowserRouter>
     <Routes>
       <Route path = {'/'} element={<Home />}/>
-      <Route path = {'/Dashboard'} element={<Dashboard />}/>
-      <Route path = {'/Onboard'} element={<Onboard />}/>
+      {auth &&<Route path = {'/Dashboard'} element={<Dashboard />}/>}
+      {auth &&<Route path = {'/Onboard'} element={<Onboard />}/>}
     </Routes>
     </BrowserRouter>
   );

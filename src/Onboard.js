@@ -44,7 +44,7 @@ function Onboard() {
      
         const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
         const name = e.target.name
-        console.log("value" + value + "name" + name)
+        console.log("value" , value , "name" , name)
 
         setFormdata((prevState) => ({
             ...prevState,
@@ -114,7 +114,6 @@ function Onboard() {
                                 id="men-gender-identity"
                                 type="radio"
                                 name="gender-identity"
-
                                 value="man"
                                 onChange={handlechange}
                                 checked={formdata.gender_identity === "man"}
